@@ -1,0 +1,53 @@
+﻿1. project in ("Project1", "Project2", "Project3", "Project4") AND issuetype = epic and status not in (Cancelled) ORDER BY project ASC 
+2. My Open Issue - assignee = currentUser() AND resolution = Unresolved order by updated DESC
+3. Reported by Me - reporter = currentUser() order by created DESC
+4. All Issues - order by created DESC
+5. Open Issues - resolution = Unresolved order by priority DESC,updated DESC
+6. Done Issues - statusCategory = Done order by updated DESC
+7. Viewed Recently - issuekey in issueHistory() order by lastViewed DESC
+8. Created Recently - created >= -1w order by created DESC
+9. Resolved Recently - resolutiondate >= -1w order by updated DESC
+10. Updated Recently - updated >= -1w order by updated DESC
+
+
+
+Other Sample JQL
+
+1. membersof(Group Name) - Returns all users who are members of whatever group (or groups) you specify.
+	project = TIS AND assignee in membersof('jira-developers’)
+
+2. latestReleasedVersion(Project) – Returns issues associated to latest realease.
+	status in (resolved, closed) and fixVersion = latestReleasedVersion(TIS)
+	project = TIS AND status in (resolved, closed) and fixversion = "Sprint A“     
+
+3. currentUser() – Return current login user 
+	 project = "Teams in Space" AND assignee  = currentUser()
+	 project = "Teams in Space" AND reporter =  currentUser()
+
+4. project = TIS AND status CHANGED FROM "In Progress" TO "Resolved" BY jsmith
+5. status CHANGED FROM "In Progress" TO "Open"
+6. status was ("In Progress") DURING (startofweek(), endofweek())
+7. resolution changed to "Fixed" by currentUser() during (startOfYear(), endOfYear())
+8. project = TIS AND status = open AND fixVersion = "Current Sprint" AND fixVersion WAS "Last Sprint"
+9. project = TIS AND fixVersion = "Current Sprint" AND status = open ORDER BY priority, assignee
+10. project = TIS AND priority in (blocker, critical) AND created > -2w ORDER BY created DESC
+11. status=resolved AND project=“Teams in Space” OR assignee=captainjoe
+12. status=resolved OR project="Teams in Space" AND assignee=captainjoe
+13. status=resolved OR projects="Teams in Space" OR assigne=captainjoe
+14. status=resolved AND (project="Teams in Space" OR assignee=captainjoe)
+15. (status=resolved AND project="Teams in Space") OR assignee=captainjoe
+
+
+
+
+
+Extra functions to explore 
+Jira
+cascadeOption(), componentsLeadByUser(), currentLogin(), currentUser(), earliestUnreleasedVersion(), issueHistory(), issuesWithRemoteLinksByGlobalId(), lastLogin(), latestReleasedVersion(), linkedIssues(), membersOf(), projectsLeadByUser(), projectsWhereUserHasPermission(), projectsWhereUserHasRole(), releasedVersions(), standardIssueTypes(), subtaskIssueTypes(), unreleasedVersions(), votedIssues(), watchedIssues() , endOfDay(), endOfMonth(), endOfWeek(), endOfYear(), now(), startOfDay(), startOfMonth(), startOfWeek(), startOfYear(), votedIssues(), watchedIssues() etc.
+
+Jira Software / Agile specific Functions 
+openSprints() , closedSprint(), futurSprint(), parentEpic() etc.
+
+Jira Service Desk
+approved(), approver(), breached(), completed(), elapsed(), everbreached(), myApproval(), myPending(), organizationMembers(), paused(), pending(), pendingBy(), remaining(), running(), withinCalendarHours() etc. 
+
